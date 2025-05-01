@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Registration Form</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #e3f2fd;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      .container {
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        width: 100%;
+        max-width: 420px;
+        padding: 25px;
+        box-sizing: border-box;
+      }
+      h2 {
+        text-align: center;
+        color: #0d47a1;
+      }
+      label {
+        font-weight: bold;
+        display: block;
+        margin-top: 12px;
+        color: #0d47a1;
+      }
+      input,
+      select,
+      textarea {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #90caf9;
+        border-radius: 6px;
+        font-size: 14px;
+        background-color: #e3f2fd;
+        color: #0d47a1;
+        box-sizing: border-box;
+      }
+      input:focus,
+      select:focus,
+      textarea:focus {
+        border-color: #1565c0;
+        outline: none;
+      }
+      .radio-group {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 5px;
+      }
+      .radio-group label {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .checkbox-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 5px;
+      }
+      .checkbox-group label {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 14px;
+      }
+      .button-group {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 15px;
+      }
+      button {
+        background-color: #1565c0;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        padding: 12px;
+        font-size: 14px;
+        width: 48%;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+      button:hover {
+        background-color: #0d47a1;
+      }
+      .reset-btn {
+        background-color: #d32f2f;
+      }
+      .reset-btn:hover {
+        background-color: #b71c1c;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Registration Form</h2>
+      <form>
+        <label>First Name</label>
+        <input type="text" name="first-name" required />
+        <label>Last Name</label>
+        <input type="text" name="last-name" required />
+
+        <label>City:</label>
+        <select name="city">
+          <option>Gandhinagar</option>
+          <option>Ahmedabad</option>
+          <option>Surat</option>
+          <option>Vadodara</option>
+        </select>
+
+        <label>Gender:</label>
+        <div class="radio-group">
+          <label>Male <input type="radio" name="gender" value="Male" /></label>
+          <label
+            >Female <input type="radio" name="gender" value="Female"
+          /></label>
+        </div>
+
+        <label>Hobbies:</label>
+        <div class="checkbox-group">
+          <label
+            ><input type="checkbox" name="hobbies" value="Reading" />
+            Reading</label
+          >
+          <label
+            ><input type="checkbox" name="hobbies" value="Traveling" />
+            Traveling</label
+          >
+          <label
+            ><input type="checkbox" name="hobbies" value="Sports" />
+            Sports</label
+          >
+          <label
+            ><input type="checkbox" name="hobbies" value="Music" /> Music</label
+          >
+          <label
+            ><input type="checkbox" name="hobbies" value="Esports" />
+            Esports</label
+          >
+        </div>
+
+        <label>Address:</label>
+        <textarea name="address" rows="3"></textarea>
+
+        <div class="button-group">
+          <button type="submit">Register</button>
+          <button type="reset" class="reset-btn">Clear</button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
