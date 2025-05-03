@@ -1,28 +1,13 @@
 <?php
-function first($arr) {
-    $res = [];
-    $sum = 0;
-    $ptr = 0;
-    for ($i=0; $i < count($arr); $i++) { 
-        if($i - $ptr >= 3) {
-            if($sum == 0) {
-                echo $res[0] . " " . $res[1] . " " . $res[2] . "\n";
-                return;
-            }
-            $sum -= $arr[$ptr];
-            array_shift($res);
-            $ptr++;
-        }
-        $sum += $arr[$i];
-        $res[] = $arr[$i];
+for ($i=1; $i <= 30; $i++) { 
+    if($i % 3 == 0 && $i % 5 == 0) {
+        echo "fivethree ";
+    } else if($i % 3 == 0) {
+        echo "three ";
+    } else if($i % 5 == 0) {
+        echo "five ";
+    } else {
+        echo $i . " ";
     }
-    if($sum == 0) {
-        echo $res[0] . " " . $res[1] . " " . $res[2] . "\n";
-        return;
-    }
-    echo "false\n";
 }
-first(array(-1, 1, 0, 2, 3));
-first(array(2, 2, -6, 6, 0));
-first(array(0, 0, 0));
 ?>
