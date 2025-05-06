@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Student Management System</title>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>Student Management System</h1>
+            </header>
+            <div>
+                <button onclick="handleAddStudent()">Add New Student</button>
+                <button onclick="handleDisplayStudents()">Display All Students</button>
+                <button onclick="handleHighestMarks()">Show Student with Highest Marks</button>
+                <button onclick="handleFindByCity()">Find Students by City</button>
+            </div>
+            <div>
+                <pre id="output-display"></pre>
+            </div>
+        </div>
+        <script>
+let students = [];
+function displayOutput(text) {
+    document.getElementById("output-display").innerHTML = text;
+}
+function displayTable(headers, data) {
+    let tableHtml = '<table>';
+    tableHtml += '<tr>';
+    headers.forEach(header => {
+        tableHtml += `<th>${header}</th>`;
+    });
+    tableHtml += '</tr>';
+    data.forEach(row => {
+        tableHtml += '<tr>';
+        row.forEach(cell => {
+            tableHtml += `<td>${cell}</td>`;
+        });
+        tableHtml += '</tr>';
+    });
+    tableHtml += '</table>';
+    return tableHtml;
+}
+class Student {
+    constructor(fname, lname, city, marks) {
+        this.fname = fname;
+        this.lname = lname;
+        this.city = city;
+        this.marks = marks;
+        this.total = this.calculateTotal();
+        this.percentage = this.calculatePercentage();
+        this.failCount = this.getFailCount();
+    }
+    calculateTotal() {
+        return this.marks.reduce((sum, mark) => sum + mark, 0);
+    }
+    calculatePercentage() {
+        return (this.total / (this.marks.length * 100)) * 100;
+    }
+    getFailCount() {
+        return this.marks.filter(mark => mark < 40).length;
+    }
+    getFullName() {
+        return `${this.fname} ${this.lname}`;
+    }
+}
+function handleAddStudent() {
+    const fname = prompt("Enter first name:");
+    if (!fname) return;
+    const lname = prompt("Enter last name:");
+    if (!lname) return;
+    const city = prompt("Enter city:");
+    if (!city) return;
+    const marks = [];
+    for (let i = 1; i <= 3; i++) {
+        const mark = parseFloat(prompt(`Enter marks for subject ${i} (out of 100):`));
+        if (isNaN(mark) || mark < 0 || mark > 100) {
+            alert("Please enter valid marks between 0 and 100.");
+            return;
+        }
+        marks.push(mark);
+    }
+    const student = new Student(fname, lname, city, marks);
+    students.push(student);
+    displayOutput(`<div class="success-message">Added student:
+${student.getFullName()}</div>`);
+}
+function handleDisplayStudents() {
+    if (students.length === 0) {
+        displayOutput("<div class='error-message'>No students found.</div>");
+        return;
+    }
+    const headers = ['Name', 'City', 'Subject 1', 'Subject 2', 'Subject 3', 'Total', 'Percentage',
+        'Status'];
+    const data = students.map(student => [
+        student.getFullName(),
+        student.city,
+        student.marks[0],
+        student.marks[1],
+        student.marks[2],
+        student.total,
+        student.percentage.toFixed(2) + '%',
+        student.failCount > 0 ? `Failed in ${student.failCount} subjects` : 'Pass'
+    ]);
+    displayOutput("<h2>All Students</h2>" + displayTable(headers, data));
+}
+function handleHighestMarks() {
+    if (students.length === 0) {
+        displayOutput("<div class='error-message'>No students found.</div>");
+        return;
+    }
+    let highest = students[0];
+    for (let i = 1; i < students.length; i++) {
+        if (students[i].total > highest.total) {
+            highest = students[i];
+        }
+    }
+    let result = `<div class="stats-box">
+<div class="stats-title">Student with Highest Marks</div>
+<p><strong>Name:</strong> ${highest.getFullName()}</p>
+<p><strong>City:</strong> ${highest.city}</p>
+<p><strong>Marks:</strong> ${highest.marks.join(", ")}</p>
+<p><strong>Total:</strong> ${highest.total}</p>
+<p><strong>Percentage:</strong> ${highest.percentage.toFixed(2)}%</p>
+</div>`;
+    displayOutput(result);
+}
+function handleFindByCity() {
+    const city = prompt("Enter city name:");
+    if (!city) return;
+    const cityStudents = students.filter(student =>
+        student.city.toLowerCase() === city.toLowerCase()
+    );
+    if (cityStudents.length === 0) {
+        displayOutput(`<div class="error-message">No students found from ${city}.</div>`);
+        return;
+    }
+    const headers = ['Name', 'Subject 1', 'Subject 2', 'Subject 3', 'Total', 'Percentage'];
+    const data = cityStudents.map(student => [
+        student.getFullName(),
+        student.marks[0],
+        student.marks[1],
+        student.marks[2],
+        student.total,
+        student.percentage.toFixed(2) + '%'
+    ]);
+    displayOutput(`<h2>Students from ${city}</h2>` + displayTable(headers, data));
+}
+        </script>
+    </body>
+</html>

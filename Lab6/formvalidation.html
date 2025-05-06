@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>General Form</title>
+    </head>
+    <body>
+        <div>
+            <h1>Feedback Form</h1>
+            <hr color="blue">
+            <h3><u>ADANI-UNIVERSITY</u></h3>
+            <hr color="blue">
+            <form id="feedbackForm">
+                <label>First Name:</label>
+                <input type="text" id="firstName" required>
+                <label>Last Name:</label>
+                <input type="text" id="lastName" required>
+                <label>Email:</label>
+                <input type="text" id="email" required>
+                <label>Contact Number (+91):</label>
+                <input type="text" id="phone" required>
+                <label>Leave your feedback:</label>
+                <textarea rows="text" id="feedback" required></textarea>
+                <div>
+                    <button type="reset">Reset</button>
+                    <button type="submit">Submit</button>
+                </div>
+            </form>
+            <h2>Your feedback is very important for us...</h2>
+        </div>
+        <script>
+document.getElementById("feedbackForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    const firstName = document.getElementById("firstName").value.trim();
+    const lastName = document.getElementById("lastName").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const nameRegex = /^[A-Za-z\s]+$/;
+    if (!nameRegex.test(firstName)) {
+        alert("Please enter a valid first name (letters only).");
+        return;
+    }
+    if (!nameRegex.test(lastName)) {
+        alert("Please enter a valid last name (letters only).");
+        return;
+    }
+    const emailRegex = /^[a-zA-Z0-9]+[\w.-]*@[a-zA-Z]+\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(email)) {
+        alert("Enter a valid email (no special characters at start, one '@', at least one dot, and nothing after dot except letters).");
+        return;
+    }
+    const phoneRegex = /^(\+91)?[6-9][0-9]{9}$/;
+    if (!phoneRegex.test(phone)) {
+        alert("Enter a valid 10-digit mobile number. Optional +91 prefix.");
+        return;
+    }
+    alert("Form submitted successfully!");
+    this.submit();
+});
+</script>
+    </body>
+</html>
