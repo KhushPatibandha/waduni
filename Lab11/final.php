@@ -12,18 +12,18 @@ function second($str, $i) {
 }
 
 function third($num) {
-    $last = $num % 10;
-    $digits = (int) (log10($num));
-    $first = (int) ($num / pow(10, $digits));
-    $res = $last * pow(10, $digits);
-    $res += $num % pow(10, $digits);
-    $res -= $last;
-    $res += $first;
-    echo $res . "\n";
+    $x = (string)$num;
+    $x = $x[strlen($x) - 1] . ""  . substr($x, 1, strlen($x) - 2) ."". $x[0];
+    echo (int)$x . "\n";
 }
 
 function fourth($str, $char, $i) {
     echo substr($str, 0, $i) . $char . substr($str, $i) . "\n";
+}
+
+function fifth($str, $target, $rep) {
+    $idx = strpos($str, $target);
+    echo substr($str, 0, $idx) . $rep . substr($str, $idx + strlen($target)) . "\n";
 }
 
 first(20);
@@ -38,4 +38,6 @@ third(100);
 third(12345);
 
 fourth("khush", 'u', 3);
+
+fifth("I dont like adani", "dont ", "")
 ?>
